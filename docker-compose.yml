@@ -17,6 +17,20 @@ services:
     depends_on:
       - keycloak
       - basket
+  awesomeshop:
+    image: nicolasfy/awesomeshop:1.0
+    container_name: awesomeshop-front
+    ports:
+      - "4200:80"
+    restart: always 
+    environment:
+      API_URL: "http://localhost:5100"
+      KEYCLOAK_URL: "http://localhost:8080"
+    networks:
+      - miage-corp
+    depends_on:
+      - keycloak
+      - backforfront
   keycloak:
     image: jboss/keycloak:10.0.2
     container_name: keycloak
